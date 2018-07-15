@@ -6,30 +6,14 @@ import java.util.*;
 public class TwoSum {
 
   public int[] twoSum(int[] nums, int target) {
-    Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
+    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
     for (int i = 0; i < nums.length; i++) {
-      Set<Integer> idxes = map.get(nums[i]);
-      if (idxes == null) {
-        idxes = new LinkedHashSet<Integer>(1);
-        map.put(nums[i], idxes);
+      int remain = target - nums[i];
+      if(map.containsKey(remain)) {
+        return new int[] {map.get(remain), i};
       }
-      idxes.add(i);
+      map.put(nums[i], i);
     }
-
-    for (int i = 0; i < nums.length; i++) {
-      Set<Integer> idxes = map.get(target - nums[i]);
-      if (idxes == null) {
-        continue;
-      } else if (idxes.contains(i) && idxes.size() == 1) {
-        continue;
-      } else if (idxes.contains(i)) {
-        Iterator<Integer> it = idxes.iterator();
-        return new int[] { it.next(), it.next() };
-      } else {
-        return new int[] { i, idxes.iterator().next() };
-      }
-    }
-
     return null;
   }
 
