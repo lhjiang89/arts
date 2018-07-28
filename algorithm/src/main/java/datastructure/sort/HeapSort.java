@@ -11,13 +11,10 @@ public class HeapSort {
     }
 
     for (int i = a.length - 1; i >= 1; i--) {
+      // swap biggest one to the i-th position and sort prior nodes again
       SortUtil.swap(a, 0, i);
-      heapSort(a, i - 1);
+      adjust(a, 0, i - 1);
     }
-  }
-
-  private static void heapSort(int[] a, int last) {
-      adjust(a, 0, last);
   }
 
   private static void adjust(int[] a, int parent, int last) {
